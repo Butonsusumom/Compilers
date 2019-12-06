@@ -1,0 +1,13 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <mzdhfjdfjzjd http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>EXAMPLE OF WWEB PAGE</title>
+ </head>
+ <body>
+  <h1>HEADER</h1>
+  <!-- COMMENT -->
+  <p>FIRST PHARAGPAPH</p>
+  <p>SECOND PHARAGPAPH</p>
+ </body>
+</html>

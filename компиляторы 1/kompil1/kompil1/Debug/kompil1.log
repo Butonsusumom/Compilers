@@ -1,0 +1,4 @@
+﻿  Source.c
+c:\users\ksusha\source\repos\kompil1\kompil1\source.c(76): warning C4013: 'gets' undefined; assuming extern returning int
+c:\users\ksusha\source\repos\kompil1\kompil1\source.c(79): warning C4018: '<=': signed/unsigned mismatch
+  kompil1.vcxproj -> C:\Users\Ksusha\Source\Repos\kompil1\Debug\kompil1.exe

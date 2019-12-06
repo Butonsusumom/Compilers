@@ -1,0 +1,38 @@
+(* document *)
+<document> = {<document_part>} <END>
+<document_part> = <block> | <empty_tag> | <comment> | <macro_tag> | <text>
+<block> = <opening_tag> {<document_part>} <closing_tag>
+
+(* tags *)
+<opening_tag> = "<" {<ws>} <block_tag_name> [<attributes_list>] {<ws>} ">"
+<closing_tag> = "<" "/" {<ws>} <block_tag_name> {<ws>} ">"
+<empty_tag> = "<" "!" {<ws>} <empty_tag_name> [<attributes_list] {<ws>} ["/"] ">"
+<comment> = "<" "!" "--" <comment_text> "--" ">"
+<macro_tag> = "<" "?" <macro_text> "?" ">"
+<block_tag_name> =  "a" | "abbr" | "address" | "article" | "aside" | "audio" | "b" | "bdo" | "blockquote" | "body" | "button" | "canvas" | "caption" | "cite" | "code" | "colgroup" | "data" | "datalist" | "dd" | "del" | "details" | "dfn" | "dialog" | "div" | "dl" | "dt" | "em" | "fieldset" | "figcaption" | "figure" | "footer" | "form" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "head" | "header" | "html" | "i" | "iframe" | "ins" | "kbd" | "label" | "legend" | "li" | "main" | "map" | "mark" | "meter" | "nav" | "noscript" | "object" | "ol" | "optgroup" | "option" | "output" | "p" | "picture" | "pre" | "progress" | "q" | "ruby" | "rb" | "rt" | "rtc" | "rp" | "s" | "samp" | "script" | "section" | "select" | "small" | "span" | "strong" | "style" | "sub" | "summary" | "sup" | "table" | "tbody" | "td" | "template" | "textarea" | "tfoot" | "th" | "thead" | "time" | "title" | "tr" | "track" | "u" | "ul" | "var" | "video"
+<empty_tag_name> = "area" | "base" | "br" | "col" | "embed" | "hr" | "img" | "input" | "link" | "menuitem" | "meta" | "param" | "source" | "track" | "wbr"
+
+(* attributes *)
+<attributes_list> = <ws> {<ws>} <attribute> {<ws> {<ws>} <attribute>}
+<attribute> = <empty_attribute> | <unquoted_attribute> | <single_quoted_attribute> | <double_quoted_attribute>
+<empty_attribute> = <attribute_name>
+<unquoted_attribute> = <attribute_name> {<ws>} "=" {<ws>} <unquoted_attribute_value>
+<single_quoted_attribute> = <attribute_name> {<ws>} "=" {<ws>} "'" <single_quoted_attribute_value> "'"
+<double_quoted_attribute> = <attribute_name> {<ws>} "=" {<ws>} "\"" <double_quoted_attribute_value> "\""
+<attribute_name> = (<letter> | <digit>) {<letter> | <digit>}
+
+{* attribute values *)
+<unquoted_attribute_value> = /^[\s"'=<>/]/ {/^[\s"'=<>/]/}
+<single_quoted_attribute_value> = /^[']/ {/^[']/}
+<double_quoted_attribute_value> = /^["]/ {/^["]/}
+
+(* nonterminals *)
+<text> = {/^[<>]/}
+<comment_text> = ...
+<macro_text> = ...
+<letter> = /[a-zA-Z]/
+<digit> = /[0-9]/
+<ws> = " " | "\t" | "\n"
+
+(* terminals *)
+"<", ">", "/", "!", "?", " ", "\t", "\n"

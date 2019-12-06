@@ -1,0 +1,60 @@
+
+%option noyywrap
+%{
+
+#include<stdio.h>
+#include <string.h>
+int cW=0;
+int cL=0;
+int cA=0;
+FILE *yyin,*out,*yyout;
+FILE *file, *lol;
+char buf[200];
+char s[200];
+
+%}
+
+%%
+
+" Windows " {fprintf(yyout," ");cW++;}
+\xbf"Windows " {fprintf(yyout," ");cW++;}
+
+
+
+" Linux "  {fprintf(yyout," ");cL++;}
+\xbf"Linux " {fprintf(yyout," ");cL++;}
+
+
+
+" Android " {fprintf(yyout," ");cA++;}
+\xbf"Android " {fprintf(yyout," ");cA++;}
+
+
+%%
+
+
+
+int main() {
+	file = fopen("input.txt", "r");
+	while (!feof(file)) {
+		fscanf(file, "%s", s);
+		strcat(buf, s);
+		strcat(buf, " ");
+	}
+	lol = fopen("C:/Users/Ksusha/Downloads/input1.txt", "w");
+	fprintf(lol, "%s", buf);
+	fclose(file);
+	fclose(lol);
+
+yyin = fopen("C:/Users/Ksusha/Downloads/input1.txt", "r");
+yyout = fopen("out.txt", "w");
+out = fopen("output.txt", "w");
+    yylex();
+      fprintf(out,"Windows: %d\nLinux: %d\nAndroid: %d",cW,cL,cA);
+    fclose(yyin);
+    fclose(yyout);
+    fclose(out);
+
+return 0;
+
+}
